@@ -75,8 +75,6 @@ body
         margin-bottom: .4em
     &__span
         font-weight: 600
-
-
 @media ( min-width: 380px  )
     .country
         width: 16rem
@@ -90,15 +88,19 @@ body
         justify-content: space-around
 
 .country-details
-    position: fixed
+    position: absolute
     width: 100%
-    min-height: 120vh
+    min-height: 100vh
+    max-height: 120vh
     top: 3.8rem
     left: 0
     background-color: hsl(0, 0%, 98%)    
     z-index: 10
+    // overflow-y: scroll
     &__flag-container
-        width: 80%
+        margin: auto
+        width: 65%
+        max-width: 26rem
     &__flag-img
         width: 100%
     &__span

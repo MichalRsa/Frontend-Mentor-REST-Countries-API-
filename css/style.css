@@ -143,9 +143,10 @@ body {
 }
 
 .country-details {
-  position: fixed;
+  position: absolute;
   width: 100%;
-  min-height: 120vh;
+  min-height: 100vh;
+  max-height: 120vh;
   top: 3.8rem;
   left: 0;
   background-color: #fafafa;
@@ -153,7 +154,9 @@ body {
 }
 
 .country-details__flag-container {
-  width: 80%;
+  margin: auto;
+  width: 65%;
+  max-width: 26rem;
 }
 
 .country-details__flag-img {

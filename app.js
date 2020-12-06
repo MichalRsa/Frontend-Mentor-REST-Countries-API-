@@ -38,7 +38,10 @@ const showCountry = (country) => {
   divDetails.append(h2, divContent);
   divCountry.append(divFlag, divDetails);
 
-  divCountry.addEventListener('click', () => showCountryDetails(country));
+  divCountry.addEventListener('click', () => {
+    list.style.display = 'none';
+    showCountryDetails(country);
+  });
 };
 
 const renderList = (data) => {
@@ -48,11 +51,16 @@ const renderList = (data) => {
 };
 
 const showRegion = (countries, region) => {
-  filtered = countries.filter(
-    (country) => country.region.toLowerCase() == region
-  );
-  list.innerHTML = '';
-  renderList(filtered);
+  if (region === 'all') {
+    list.innerHTML = '';
+    renderList(countries);
+  } else {
+    filtered = countries.filter(
+      (country) => country.region.toLowerCase() == region
+    );
+    list.innerHTML = '';
+    renderList(filtered);
+  }
 };
 
 const searchForCountry = (e) => {
@@ -115,7 +123,12 @@ const showCountryDetails = (country) => {
   const btn = document.createElement('button');
   btn.innerHTML = 'Back';
   btn.classList.add('country-details__button');
-  btn.addEventListener('click', () => body.removeChild(container));
+  btn.addEventListener('click', () => {
+    body.removeChild(container);
+    if (body.lastChild !== container) {
+      list.style.display = 'flex';
+    }
+  });
 
   const flagContainer = document.createElement('div');
   flagContainer.classList.add('country-details__flag-container');
@@ -161,11 +174,16 @@ const showCountryDetails = (country) => {
 };
 
 fetch('https://restcountries.eu/rest/v2/all')
-  .then((response) => response.json())
+  .then((response) => {
+    if (response.ok) return response.json();
+
+    throw Error(response.status);
+  })
   .then((data) => {
     countries.push(...data);
     renderList(countries);
-  });
+  })
+  .catch((error) => console.log(error));
 
 selectRegion.addEventListener('change', () =>
   showRegion(countries, selectRegion.value)
