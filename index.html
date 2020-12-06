@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <p class="header__title">Where in te world</p>
+      <div class="header__night-mode-button">click</div>
+    </header>
+
+    <form class="search-for-country">
+      <input type="text" class="search-for-country__input" />
+      <button type="submit">Lupka</button>
+    </form>
+
+    <select name="show region" class="select-region">
+      <option value="">Filter by Region</option>
+      <option value="africa">Africa</option>
+      <option value="americas">America</option>
+      <option value="asia">Asia</option>
+      <option value="europe">Europe</option>
+      <option value="oceania">Oceania</option>
+    </select>
+    <div class="country-list"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
