@@ -75,7 +75,6 @@ const searchForCountry = (e) => {
     );
     if (matchingCountries.length === 0) {
       input.value = '';
-      console.log('ni ma');
       return;
     }
 
@@ -87,7 +86,6 @@ const searchForCountry = (e) => {
     );
     if (matchingCountries.length === 0) {
       input.value = '';
-      console.log('ni ma');
       return;
     }
 
@@ -114,19 +112,21 @@ const showCountryDetails = (country) => {
 
   const currenciesArr = [];
   currencies.forEach((cur) => currenciesArr.push(cur.name));
-  console.log(currenciesArr);
 
   const languagesArr = [];
   languages.forEach((lang) => languagesArr.push(lang.name));
-  console.log(languagesArr);
 
   const btn = document.createElement('button');
   btn.innerHTML = 'Back';
   btn.classList.add('country-details__button');
   btn.addEventListener('click', () => {
     body.removeChild(container);
-    if (body.lastChild !== container) {
+    if (body.lastChild.nodeName !== 'DIV') {
       list.style.display = 'flex';
+    } else if (body.lastChild.nodeName === 'DIV') {
+      if (window.innerWidth > 1200) {
+        body.lastChild.style.display = 'grid';
+      } else body.lastChild.style.display = 'block';
     }
   });
 
@@ -135,6 +135,7 @@ const showCountryDetails = (country) => {
   flagContainer.innerHTML = `<img src='${flag}' class='country-details__flag-img'>`;
 
   const countryDetails = document.createElement('div');
+  countryDetails.classList.add('country-details__description');
   countryDetails.innerHTML = `
     <h2>${name}</h2>
     <p class='country-details__p'><span class='country-details__span'>Native Name:</span> ${name}</p>
@@ -152,15 +153,19 @@ const showCountryDetails = (country) => {
   `;
 
   const borderCountries = document.createElement('div');
+  borderCountries.classList.add('country-details__border-countries');
   borderCountries.innerHTML = `<h2>Border Countries:</h2>`;
   const borderCountriesButtons = (borders) => {
     borders.forEach((border) => {
       const btn = document.createElement('button');
+      btn.classList.add('country-details__button');
       const name = countries.filter((country) => country.alpha3Code === border);
       btn.innerText = `${name[0].name}`;
-      btn.addEventListener('click', () => showCountryDetails(name[0]));
+      btn.addEventListener('click', () => {
+        body.lastChild.style.display = 'none';
+        showCountryDetails(name[0]);
+      });
       borderCountries.appendChild(btn);
-      console.log(name);
     });
   };
 
