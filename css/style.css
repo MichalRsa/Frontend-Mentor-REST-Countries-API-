@@ -194,6 +194,7 @@ body {
   font-size: 1.2rem;
   padding: .4em 1em;
   margin: .6em .6em .6em 0;
+  max-height: 3rem;
 }
 
 .country-details__flag-container {
@@ -234,8 +235,6 @@ body {
     -ms-grid-column: 1;
     -ms-grid-column-span: 1;
     grid-area: 1 / 1 / 2 / 2;
-    max-width: 10rem;
-    max-height: 3rem;
     -ms-flex-item-align: center;
         -ms-grid-row-align: center;
         align-self: center;
